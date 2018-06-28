@@ -14,8 +14,22 @@ public class DeptService {
 	
 	public int addDept(Department d) {
 		int id = d.getId();
+		if(d.getName() == null || d.getName().length() == 0 || d.getId() < 1) {
+			return -1;
+		}
 		depRepo.saveAndFlush(d);
 		return id;
+	}
+	
+	public Department getDept(int id) {
+		Department d = new Department();
+		try {
+			d = depRepo.getOne(id);
+			return d;
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return d;
 	}
 	
 }

@@ -25,29 +25,39 @@ public class EmpRestController {
 	EmployeeService empService;
 	
 	@GetMapping("/employees/{id}")
-	public ResponseEntity<EmployeeTO> getEmployee(@PathVariable("id") int id) {
-
+	public ResponseEntity<String> getEmployee(@PathVariable("id") int id) {
+		String result ="";
 		Employee employee = empService.getEmp(id);
-		EmployeeTO EmployeeTO = new EmployeeTO(employee.getFirstName(), employee.getLastName(), employee.getAddress(), employee.getDeptId());
-		EmployeeTO.setEmpId(employee.getEmpId());
-		return new ResponseEntity<EmployeeTO>(EmployeeTO, HttpStatus.OK);
+		if(employee == null) {
+			result = "No employee found";
+		} else {
+			EmployeeTO EmployeeTO = new EmployeeTO(employee.getFirstName(), employee.getLastName(), employee.getAddress(),employee.getEmpId(), employee.getDeptId());
+		
+			result = EmployeeTO.toString();
+		}
+		return new ResponseEntity<String>(result, HttpStatus.OK);
 		
 	}
 
 	@GetMapping("/departments/{id}")
 	public ResponseEntity<DepartmentTO> getDepartment(@PathVariable("id") int id) {
 		
-		DepartmentTO dto = new DepartmentTO(2, "HR2");
+		Department d = depService.getDept(id);
+		DepartmentTO dto = new DepartmentTO(d.getId(), d.getName());
 		return new ResponseEntity<DepartmentTO>(dto, HttpStatus.OK);
 		
 	}
 	
 	@PostMapping("/employees")
-	public ResponseEntity<EmployeeTO> addUser(@RequestBody EmployeeTO emp) {
-
+	public ResponseEntity<String> addUser(@RequestBody EmployeeTO emp) {
+		String result = "";
 		emp = empService.addEmp(emp);
-
-		return new ResponseEntity<EmployeeTO>(emp, HttpStatus.OK);
+		if (emp == null) {
+			result = "Employee not added.";
+		} else {
+			result = "Employee added with empId: " + emp.getEmpId();
+		}
+		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}
 	
 	@PostMapping("/departments")

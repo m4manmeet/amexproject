@@ -15,8 +15,6 @@ public class Employee {
 	private String address;
 	private int deptId;
 	
-	
-	
 	public Employee(int id, String fName, String lName, String add, int deptId) {
 		this.empId = id;
 		this.firstName = fName;

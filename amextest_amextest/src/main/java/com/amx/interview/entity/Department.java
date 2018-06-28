@@ -9,7 +9,7 @@ import javax.persistence.Table;
 public class Department {
 	
 	@Id
-	private int id;
+	private int departmentId;
 	private String name;
 	
 	
@@ -17,16 +17,16 @@ public class Department {
 		
 	}
 	public Department(int id, String name) {
-		this.id = id;
+		this.departmentId = id;
 		this.name = name;
 	}
 
 	public int getId() {
-		return id;
+		return departmentId;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.departmentId = id;
 	}
 
 	public String getName() {

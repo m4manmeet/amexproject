@@ -12,11 +12,12 @@ public class EmployeeTO {
 	public EmployeeTO() {
 		
 	}
-	public EmployeeTO(String fName, String lName, String add, int deptId) {
+	public EmployeeTO(String fName, String lName, String add, int empId, int deptId) {
 		this.firstName = fName;
 		this.lastName = lName;
 		this.address = add;
 		this.deptId = deptId;
+		this.empId = empId;
 	}
 
 	public int getEmpId() {
@@ -58,5 +59,13 @@ public class EmployeeTO {
 	public void setDeptId(int deptId) {
 		this.deptId = deptId;
 	}
+	@Override
+	public String toString() {
+		
+		return "Name: " + this.getFirstName() + " " + this.getLastName() + "  EmpId: " + 
+				this.getEmpId() + "  DeptId: " + this.getDeptId() + "  Address: " + this.getAddress();
+	}
+	
+	
 	
 }
